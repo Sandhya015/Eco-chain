@@ -33,7 +33,7 @@
 }
 
 .nav-area li a {
-  color: #ffffff !important; /* Force text color to white */
+  color: #ffffff !important; 
   text-decoration: none;
   padding: 5px 20px;
   font-family: 'Poppins', sans-serif;
