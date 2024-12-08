@@ -1,4 +1,3 @@
-//welcome page
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './welcome.css';
@@ -19,19 +18,19 @@ const Welcome = () => {
                 <a onClick={() => navigate('/home')}>Home</a>
               </li>
               <li>
-                <a onClick={() => navigate('/about')}>About</a>
+                <a onClick={() => navigate('/register/customer')}>Sign Up</a>
               </li>
               <li>
-                <a onClick={() => navigate('')}>Sign Up</a>
-              </li>
-              <li>
-                <a onClick={() => navigate('')}>Sign In</a>
+                <a onClick={() => navigate('/login')}>Sign In</a>
               </li>
               <li>
                 <a onClick={() => navigate('/contact')}>Contact</a>
               </li>
               <li>
-                <a onClick={() => navigate('/contact')}>Certify</a>
+                <a onClick={() => navigate('/inspect')}>Update</a>
+              </li>
+              <li>
+                <a onClick={() => navigate('/about')}>Inspect</a>
               </li>
             </ul>
           </div>
