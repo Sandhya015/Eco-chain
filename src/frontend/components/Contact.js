@@ -7,6 +7,7 @@ const Contact = () => {
       <p>If you have any questions or need further information, feel free to reach out.</p>
       <p>Email: contact@wastemanagement.com</p>
       <p>Phone: +1234567890</p>
+      <p>hello</p>
     </div>
   );
 };
