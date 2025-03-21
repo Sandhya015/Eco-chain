@@ -1,54 +1,94 @@
 import React, { useState } from 'react';
+import './Inspect.css'; // Import CSS file
 
 const Inspect = () => {
-  // Dummy user data for demonstration
-  const users = [
-    { id: 1, name: 'John Doe', email: 'john@example.com', transactions: ['Added Plastic', 'Transferred Waste'] },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', transactions: ['Added Metal', 'Processed Waste'] },
+  const initialUsers = [
+    { id: 1, name: 'John Doe', userId: 'U1001', aadhaar: '1234-5678-9012', wasteDetails: 'Added Plastic', profilePic: null },
+    { id: 2, name: 'Jane Smith', userId: 'U1002', aadhaar: '2345-6789-0123', wasteDetails: 'Processed Metal', profilePic: null },
+    { id: 3, name: 'Alice Johnson', userId: 'U1003', aadhaar: '3456-7890-1234', wasteDetails: 'Transferred Glass', profilePic: null },
+    { id: 4, name: 'Robert Brown', userId: 'U1004', aadhaar: '4567-8901-2345', wasteDetails: 'Added E-Waste', profilePic: null },
+    { id: 5, name: 'Emily Davis', userId: 'U1005', aadhaar: '5678-9012-3456', wasteDetails: 'Transferred Plastic', profilePic: null },
+    { id: 1, name: 'John Doe', userId: 'U1001', aadhaar: '1234-5678-9012', wasteDetails: 'Added Plastic', profilePic: null },
+    { id: 2, name: 'Jane Smith', userId: 'U1002', aadhaar: '2345-6789-0123', wasteDetails: 'Processed Metal', profilePic: null },
+    { id: 3, name: 'Alice Johnson', userId: 'U1003', aadhaar: '3456-7890-1234', wasteDetails: 'Transferred Glass', profilePic: null },
+    { id: 4, name: 'Robert Brown', userId: 'U1004', aadhaar: '4567-8901-2345', wasteDetails: 'Added E-Waste', profilePic: null },
   ];
 
+  const [users, setUsers] = useState(initialUsers);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [newWasteDetails, setNewWasteDetails] = useState('');
+
+  // Handle file upload
+  const handleFileChange = (event) => {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const updatedUsers = users.map((user) =>
+          user.id === selectedUser.id ? { ...user, profilePic: reader.result } : user
+        );
+        setUsers(updatedUsers);
+        setSelectedUser({ ...selectedUser, profilePic: reader.result });
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleUpdate = () => {
+    const updatedUsers = users.map((user) =>
+      user.id === selectedUser.id ? { ...user, wasteDetails: newWasteDetails } : user
+    );
+    setUsers(updatedUsers);
+    setSelectedUser({ ...selectedUser, wasteDetails: newWasteDetails });
+    setNewWasteDetails('');
+  };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>Inspect Users</h1>
-      
-      <div style={{ marginTop: '20px' }}>
+    <div className="inspect-container">
+      <h1>Update Users</h1>
+
+      <div className="user-list">
         {selectedUser ? (
-          // Detail view for a selected user and updating it
-          <div>
-            <h2>User Details</h2>
-            <p><strong>Name:</strong> {selectedUser.name}</p>
-            <p><strong>Email:</strong> {selectedUser.email}</p>
-            <h3>Transactions:</h3>
-            <ul>
-              {selectedUser.transactions.map((txn, idx) => (
-                <li key={idx} style={{ padding: '5px', backgroundColor: '#f2f2f2', margin: '5px 0', borderRadius: '4px' }}>
-                  {txn}
-                </li>
-              ))}
-            </ul>
-            <button 
-              onClick={() => setSelectedUser(null)} 
-              style={{ marginTop: '20px', padding: '10px', backgroundColor: '#ddd', cursor: 'pointer', border: 'none', borderRadius: '4px' }}
-            >
-              Back to Users
-            </button>
+          <div className="user-details">
+            {/* Profile Image Upload */}
+            <div className="profile-section">
+              <img
+                src={selectedUser.profilePic || "https://via.placeholder.com/150"}
+                alt="Profile"
+                className="profile-img"
+              />
+              <input type="file" accept="image/*" onChange={handleFileChange} />
+            </div>
+
+            {/* User Info */}
+            <div className="user-info">
+              <h2>User Profile</h2>
+              <p><strong>Name:</strong> {selectedUser.name}</p>
+              <p><strong>User ID:</strong> {selectedUser.userId}</p>
+              <p><strong>Aadhaar No.:</strong> {selectedUser.aadhaar}</p>
+              <p><strong>Waste Transfer Details:</strong> {selectedUser.wasteDetails}</p>
+
+              {/* Update Section */}
+              <input
+                type="text"
+                placeholder="Update Waste Transfer Details"
+                value={newWasteDetails}
+                onChange={(e) => setNewWasteDetails(e.target.value)}
+              />
+              <button className="update-btn" onClick={handleUpdate}>Update</button>
+              <button className="back-btn" onClick={() => setSelectedUser(null)}>Back to Users</button>
+            </div>
           </div>
         ) : (
-          // List all users
           <div>
             <h2>All Users</h2>
-            <ul style={{ listStyleType: 'none', padding: '0' }}>
+            <ul>
               {users.map((user) => (
-                <li key={user.id} style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#f4f4f4', borderRadius: '4px' }}>
-                  <strong>{user.name}</strong> - {user.email}
-                  <button 
-                    onClick={() => setSelectedUser(user)} 
-                    style={{ marginLeft: '15px', padding: '5px 10px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-                  >
-                    View Details
-                  </button>
+                <li key={user.id} className="user-card">
+                  <strong>{user.name}</strong> - {user.userId}
+                  <button className="view-btn" onClick={() => setSelectedUser(user)}>View Details</button>
                 </li>
               ))}
             </ul>
