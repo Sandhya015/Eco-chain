@@ -1,0 +1,87 @@
+.about-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.about-container h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.about-container p {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.about-container .team-section {
+    margin-top: 20px;
+}
+
+.about-container .team-section h2 {
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.about-container .team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px; /* Increased gap for spacing */
+}
+
+.about-container .team-member {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 200px;
+}
+
+.about-container .team-member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.about-container .team-member h3 {
+    font-size: 1.2rem;
+    color: #222;
+}
+
+.about-container .team-member p {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Styling for buttons */
+.about-container .team-member button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #006400; /* Dark Green */
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+    display: block;
+    width: 100%; /* Full width for better spacing */
+    margin-bottom: 10px; /* Space between buttons */
+}
+
+/* Hover effect for button */
+.about-container .team-member button:hover {
+    background-color: #004d00; /* Slightly darker green */
+}
